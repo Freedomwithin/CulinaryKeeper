@@ -15,6 +15,8 @@ An expansive recipe tracker application built with the following tech stack. Sta
     * create-react-app: Tool for setting up a new React project.
     * ESLint: Linting tool for code quality and style checking (optional, but recommended).
     * Git: Version control system for tracking changes.
+## Sample Image
+![alt text](images/CulinaryKeeper.png)
 
 ## Features
 

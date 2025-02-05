@@ -2,7 +2,8 @@
 /node_modules
 /.pnp
 .pnp.js
-pnp.loader.mjs
+.pnp.cjs
+.pnp.loader.mjs
 
 # Testing
 /coverage
@@ -16,6 +17,7 @@ pnp.loader.mjs
 .env.development.local
 .env.test.local
 .env.production.local
+yarn.lock
 
 # Logs
 npm-debug.log*

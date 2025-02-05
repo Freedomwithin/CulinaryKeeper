@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Recipe Tracker</title>
+    <style>
+        /*... (CSS styles from previous examples - keep them, but add/modify as needed)... */
+        /* Style for the search/filter inputs */
+      :root {
+            --primary-color: #f4c531; /* Golden Yellow */
+            --secondary-color: #1434A4; /* Dark Blue/Gray */
+            --background-color: #f8f8f8; /* Light Gray Background */
+            --text-color: #333; /* Dark Gray Text */
+            --border-color: #ddd; /* Light Gray Border */
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle Box Shadow */
+            --font-main: 'Open Sans', sans-serif; /* Body Text */
+            --font-heading: 'Montserrat', sans-serif; /* Headings */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #root {
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+      .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+      .search-container {
+            display: flex;
+            margin-bottom: 100px;
+        }
+
+      .search-container input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+      .search-container input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(244, 197, 49, 0.3); /* Subtle glow on focus */
+        }
+
+      .add-recipe-button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+      .add-recipe-button:hover {
+            background-color: #e0b11d;
+        }
+
+      .recipe-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+      .recipe-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+      .recipe-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+      .recipe-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+      .recipe-details {
+            padding: 20px;
+        }
+
+      .recipe-details h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+      .recipe-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+      .recipe-modal-content {
+            background-color: white;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            position: relative;
+        }
+
+      .recipe-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+      .add-recipe-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            z-index: 1001;
+        }
+
+      .add-recipe-form-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+      .add-recipe-form input,
+      .add-recipe-form textarea {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+      .add-recipe-form button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+      .add-recipe-form button:hover {
+            background-color: #e0b11d;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <header>
+            <h1>My Recipe Tracker</h1>
+        </header>
+
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="recipeNameSearch" placeholder="Recipe Name">
+                <input type="text" id="ingredientSearch" placeholder="Ingredients">
+            </div>
+
+            <button class="add-recipe-button" id="addRecipeButton">Add Recipe</button>
+
+            <div class="recipe-list" id="recipeList">
+            </div>
+        </div>
+
+        <div class="recipe-modal" id="recipeModal">
+            <div class="recipe-modal-content">
+                <span class="recipe-modal-close">&times;</span>
+                <h2>Recipe Details</h2>
+                <div id="modalRecipeDetails">
+                </div>
+            </div>
+        </div>
+
+        <div class="add-recipe-form" id="addRecipeForm">
+            <div class="add-recipe-form-content">
+                <h2>Add New Recipe</h2>
+                <form id="newRecipeForm">
+                    <input type="text" id="newRecipeTitle" placeholder="Recipe Title" required><br>
+                    <input type="text" id="newRecipeImage" placeholder="Image URL"><br>
+                    <textarea id="newRecipeIngredients" placeholder="Ingredients (comma-separated)" required></textarea><br>
+                    <textarea id="newRecipeDescription" placeholder="Description" required></textarea><br>
+                    <button type="submit">Save Recipe</button>
+                    <button type="button" id="cancelAddRecipe">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const addRecipeButton = document.getElementById('addRecipeButton');
+        const addRecipeForm = document.getElementById('addRecipeForm');
+        const newRecipeForm = document.getElementById('newRecipeForm');
+        const cancelAddRecipe = document.getElementById('cancelAddRecipe');
+        const recipeList = document.getElementById('recipeList');
+        const recipeModal = document.getElementById

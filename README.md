@@ -1,6 +1,6 @@
 # CulinaryKeeper
 
-An expansive recipe tracker application built with the following tech stack. Start saving those unique recipes!!
+CulinaryKeeper is an innovative recipe management application designed for food enthusiasts, home cooks, and professional chefs alike. This user-friendly platform allows you to effortlessly store, organize, and access your favorite recipes from any device. With features like ingredient tracking, meal planning, and smart search capabilities, CulinaryKeeper streamlines your cooking process from start to finish. The app also offers collaborative features, enabling users to share recipes with friends and family, discover new culinary inspirations, and build a personalized digital cookbook. Whether you're looking to preserve cherished family recipes or experiment with new flavors, CulinaryKeeper is your ultimate companion in the kitchen, helping you turn your culinary aspirations into delicious realities.
 
 ## Tech Stack
 

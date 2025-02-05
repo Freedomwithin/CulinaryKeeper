@@ -17,14 +17,14 @@
 .env.development.local
 .env.test.local
 .env.production.local
-yarn.lock
+/yarn.lock
+/.yarn
+
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
-.yarn
 
 # Editor directories and files
 .idea
